@@ -70,11 +70,17 @@ Function wd_custom_settings_company () {
 
 function wd_meta_profile_picture(){
     $picture = esc_attr( get_option( 'wd_profile_picture'));
-    echo '<input type="button" class="button button-secondary" value="Télécharger" id="wd-upload-profile-picture-btn"> <input type="hidden" name="wd_profile_picture" id="wd-upload-profile-picture" value="'.$picture.'">';
-}
+        if(empty($picture)){
+            echo '<input type="button" class="button button-secondary" value="Enregistrer la photo" id="wd-upload-profile-picture-btn"> <input type="hidden" name="wd_profile_picture" id="wd-upload-profile-picture" value=""/>';
+            return;
+        }else{
+            echo '<input type="button" class="button button-secondary" value="Remplacer la photo" id="wd-upload-profile-picture-btn"> <input type="hidden" name="wd_profile_picture" id="wd-upload-profile-picture" value="'.$picture.'"/>';
+            echo  '<input type="button" class="button button-secondary" value="Supprimer" id="wd-delete-profile-picture-btn"> <input type="hidden" name="wd_profile_picture" id="wd-delete-profile-picture" value="'.$picture.'"/>';
+        }
+    }
 function wd_meta_data_company_logo(){
     $logo = esc_attr( get_option( 'wd_company_logo'));
-    echo '<input type="button" class="button button-secondary" value="Télécharger" id="wd-upload-logo-btn"> <input type="hidden" name="wd_company_logo" id="wd-upload-company-logo" value="'.$logo.'">';
+    echo '<input type="button" class="button button-secondary" value="Télécharger" id="wd-upload-logo-btn"> <input type="hidden" name="wd_company_logo" id="wd-upload-company-logo" value="'.$logo.'"/>';
 }
 function wd_meta_data_company(){
 //    echo 'Enter here your company address';
@@ -92,59 +98,59 @@ function wd_meta_company_region(){
 
 function wd_meta_company_street(){
     $street = esc_attr( get_option("wd_company_street",'Rue') );
-echo '<input type="text" name="wd_company_street" placeholder="Rue" value="'.$street.'">';
+echo '<input type="text" name="wd_company_street" placeholder="Rue" value="'.$street.'"/>';
 }
 
 function wd_meta_company_city(){
     $city = esc_attr( get_option("wd_company_city",'Ville') );
-    echo '<input type="text" name="wd_company_city" placeholder="Ville" value="'.$city.'">';
+    echo '<input type="text" name="wd_company_city" placeholder="Ville" value="'.$city.'"/>';
 }
 
 function wd_meta_company_post_code(){
     $postCode = esc_attr( get_option("wd_company_post_code",'Code postale') );
-    echo '<input type="text" name="wd_company_post_code" placeholder="Code postale" value="'.$postCode.'">';
+    echo '<input type="text" name="wd_company_post_code" placeholder="Code postale" value="'.$postCode.'"/>';
 }
 
 function wd_meta_job(){
     $job =  esc_attr( get_option( "wd_job", 'Fonction' ));
-    echo '<input type="text" name="wd_job" placeholder="Enter your fonction" value="'.$job.'">';
+    echo '<input type="text" name="wd_job" placeholder="Enter your fonction" value="'.$job.'"/>';
 }
 
 function wd_meta_company_adress(){
     $adress =  esc_attr( get_option( "wd_company_adress", 'Adress' ));
-    echo '<input type="text" name="wd_company_adress" placeholder="Enter your adress" value="'.$adress.'">';
+    echo '<input type="text" name="wd_company_adress" placeholder="Enter your adress" value="'.$adress.'"/>';
 }
 
 function wd_meta_data_email(){
     $email =  esc_attr( get_option( "wd_data_email", 'Email' ));
-    echo '<input type="email" name="wd_data_email" placeholder="dupon@mon-mail.com" value="'.$email.'">';
+    echo '<input type="email" name="wd_data_email" placeholder="dupon@mon-mail.com" value="'.$email.'"/>';
 }
 
 function wd_meta_company_name(){
     $companyName =  esc_attr( get_option( "wd_company_name", 'Company name' ));
-    echo '<input type="text" name="wd_company_name" placeholder="Ma petite entreprise" value="'.$companyName.'">';
+    echo '<input type="text" name="wd_company_name" placeholder="Ma petite entreprise" value="'.$companyName.'"/>';
 }
 
 function wd_meta_data_siret(){
     $siret =  esc_attr( get_option( "wd_data_siret", 'Numéro de Siret' ));
-    echo '<input type="number" name="wd_data_siret" placeholder="0123456789" value="'.$siret.'">';
+    echo '<input type="number" name="wd_data_siret" placeholder="0123456789" value="'.$siret.'"/>';
 }
 
 function wd_meta_fullName(){
     $metaName = esc_attr(get_option( "wd_meta_name", 'Enter your name' ));
     $metaSurname = esc_attr(get_option( "wd_meta_surname", 'Enter your surname' ));
-    echo '<input type="text" name="wd_meta_name" placeholder="enter your Name" value="'.$metaName.'"> 
-          <input type="text" name="wd_meta_surname" placeholder="enter your surname" value="'.$metaSurname.'">';
+    echo '<input type="text" name="wd_meta_name" placeholder="enter your Name" value="'.$metaName.'"/> 
+          <input type="text" name="wd_meta_surname" placeholder="enter your surname" value="'.$metaSurname.'"/>';
 }
 
 function wd_meta_data_phone_number(){
     $phoneNumber =  get_option( "wd_data_phone_number", 'Enter your phone number' );
-    echo '<input type="tel" name="wd_data_phone_number" placeholder="enter your Phone Number" value="'.$phoneNumber.'">';
+    echo '<input type="tel" name="wd_data_phone_number" placeholder="enter your Phone Number" value="'.$phoneNumber.'"/>';
 }
 
 function wd_meta_data_company_website(){
     $companyWebsite  =  esc_attr( get_option( "wd_data_company_website", 'Enter your web site' ));
-    echo '<input type="text" name="wd_data_company_website" placeholder="Entrez votre site web" value="'.$companyWebsite.'">';
+    echo '<input type="text" name="wd_data_company_website" placeholder="Entrez votre site web" value="'.$companyWebsite.'"/>';
 }
 function wd_premium_create_page(){
     //generation of our admin page

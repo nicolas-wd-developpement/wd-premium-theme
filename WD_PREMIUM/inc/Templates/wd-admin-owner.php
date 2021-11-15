@@ -38,10 +38,10 @@
 </div>
 <div class="display-form">
   <div>
-    <form action="options.php" method="post" class="bg.primary" id="wd-meta-personal-form">
+    <form action="options.php" method="post" class="bg.primary" id="wd-meta-personal-form" class="wd-personal-form">
         <?php settings_fields('wd-settings-owner');?>
         <?php do_settings_sections( 'nicolas_wd_premium' )?>
-        <?php submit_button();?>
+        <?php submit_button('Enregistrer','primary','btnSubmit');?>
     </form>
   </div>
 </div>
