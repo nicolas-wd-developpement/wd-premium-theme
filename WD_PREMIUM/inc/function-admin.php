@@ -97,12 +97,19 @@ function wd_meta_profile_picture(){
             echo '<input type="button" class="button button-secondary" value="Remplacer la photo" id="wd-upload-profile-picture-btn"> <input type="hidden" name="wd_profile_picture" id="wd-upload-profile-picture" value="'.$picture.'"/>
                   <input type="button" class="button button-secondary" value="Supprimer" id="wd-delete-profile-picture-btn" />';
         }
-    }
+}
+
 
     //Display Company logo
 function wd_meta_data_company_logo(){
     $logo = esc_attr( get_option( 'wd_company_logo'));
-    echo '<input type="button" class="button button-secondary" value="Télécharger" id="wd-upload-logo-btn"> <input type="hidden" name="wd_company_logo" id="wd-upload-company-logo" value="'.$logo.'"/>';
+    if(empty($logo)){
+        echo '<input type="button" class="button button-secondary" value="Télécharger" id="wd-upload-logo-btn"> <input type="hidden" name="wd_company_logo" id="wd-upload-company-logo" value="'.$logo.'"/>';
+        return;
+    }else{
+        echo '<input type="button" class="button button-secondary" value="Remplacer le logo" id="wd-upload-logo-btn"> <input type="hidden" name="wd_company_logo" id="wd-upload-company-logo" value="'.$logo.'"/>
+              <input type="button" class="button button-secondary" value="Supprimer" id="wd-delete-logo-btn" />';
+    }
 }
 function wd_meta_data_company(){
 //    echo 'Enter here your company address';

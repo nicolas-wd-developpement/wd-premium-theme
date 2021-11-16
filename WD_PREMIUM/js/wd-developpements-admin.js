@@ -54,4 +54,14 @@ jQuery(document).ready(function($){
             return;
         }
     });
+    $('#wd-delete-logo-btn').on('click',function(e){
+        e.preventDefault();
+        var wdLogoDelete = confirm('Etes vous sûr de vouloir supprimer votre logo');
+        if(wdLogoDelete == true){
+            $('#wd-upload-company-logo').val('');
+            $('#wd-meta-company-form').submit();
+        }else{
+            return;
+        }
+    });
 });

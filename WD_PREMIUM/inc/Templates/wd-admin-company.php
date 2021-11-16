@@ -42,7 +42,7 @@
 </div>
 <div class="display-form">
     <div>
-        <form action="options.php" method="post" class="bg.primary" id="wd-meta-company-form">
+        <form action="options.php" method="post" class="bg.primary" id="wd-meta-company-form" class="wd-company-form">
             <?php settings_fields('wd-settings-company');?>
             <?php do_settings_sections( 'nicolas_wd_premium_company' )?>
             <?php submit_button();?>
