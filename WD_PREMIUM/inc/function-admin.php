@@ -75,9 +75,16 @@ Function wd_custom_settings_company () {
 
     //Custom theme settings option
 function wd_custom_theme_settings(){
-    register_setting( 'wd-theme-support', 'post_format', 'wd_custom_post_format_activation' );
+    register_setting( 'wd-theme-support', 'post_format');
+    register_setting( 'wd-theme-support', 'wd_custom_header');
+    register_setting( 'wd-theme-support', 'wd_custom_css');
+    register_setting( 'wd-theme-support', 'wd_custom_background');
+    
     add_settings_section( 'wd-theme-option-settings-field', 'WD Option settings', 'wd_theme_options', 'nicolas_wd_premium_theme_options');
     add_settings_field( 'wd-post-formats', 'formats', 'wd_post_formats', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
+    add_settings_field( 'wd-custom-header', 'Entête personalisé', 'wd_custom_header_activation', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
+    add_settings_field( 'wd-custom-css', 'CSS personalisé', 'wd_custom_css_activation', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
+    add_settings_field( 'wd-custom-background', 'Fond personalisé', 'wd_custom_background_setting', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
 }
 
     //Display Company street - Download from wp media + delete
@@ -197,9 +204,21 @@ function wd_premium_create_page_company(){
 function wd_premium_theme_options_create_page(){
     require_once (get_template_directory(  ) . '/../inc/templates/wd-admin-settings.php');
 }
-    //Callback function post format
-function wd_custom_post_format_activation($input){
-    
-    return $input ;
+
+function wd_custom_header_activation(){
+    //loop the checkbox status
+    $options = get_option('wd_custom_header');
+    $checked = (@$options == 1 ? 'checked' :'' );
+    echo '<label><input type="checkbox" id="wd_custom_header" name="wd_custom_header" value="1" '.$checked.'> Activer l\'entête personalisé</label>';
+}
+function wd_custom_css_activation(){
+    $options = get_option('wd_custom_css');
+    $checked = (@$options == 1 ? 'checked' :'' );
+    echo '<label><input type="checkbox" id="wd_custom_css" name="wd_custom_css" value="1" '.$checked.'> Activer css personalisé</label>';
+}
+function wd_custom_background_setting(){
+    $options = get_option('wd_custom_background');
+    $checked = (@$options == 1 ? 'checked' :'' );
+    echo '<label><input type="checkbox" id="wd_custom_background" name="wd_custom_background" value="1" '.$checked.'> Activer le fond personalisé</label>';
 }
 add_action('admin_menu','wd_premium_admin_page');

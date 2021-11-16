@@ -16,3 +16,16 @@ foreach($formats as $format){
 if(!empty($options)){
    add_theme_support( 'post-formats', $output );
 }
+
+$optionsCustomHeader = get_option('wd_custom_header');
+if($optionsCustomHeader==1){
+    add_theme_support( 'custom-header');
+}
+$optionsCustomFooter = get_option('wd_custom_css');
+if($optionsCustomFooter==1){
+    add_theme_support( 'dark-editor-style');
+}
+$optionsCustomBackground = get_option('wd_custom_background');
+if($optionsCustomBackground==1){
+    add_theme_support( 'custom-background');
+}
