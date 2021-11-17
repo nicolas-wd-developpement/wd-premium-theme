@@ -10,7 +10,9 @@
 function wd_premium_admin_page(){
     // Generates WP admin page
     add_menu_page('Wd Premium Options', 'Wd Premium', 'manage_options','nicolas_wd_premium','wd_premium_create_page','dashicons-admin-generic',110 );
-
+   
+    // Generates WP admin contact form
+    add_submenu_page('nicolas_wd_premium', 'Wd Contact form', 'Contact','manage_options',' wd_premium_theme_contact_form','wd_premium_theme_contact_form_create_page');
     // Generates WP option settings page
     add_submenu_page( 'nicolas_wd_premium', 'Options', 'Options', 'manage_options', 'nicolas_wd_premium_theme_options', 'wd_premium_theme_options_create_page');
 
@@ -20,6 +22,7 @@ function wd_premium_admin_page(){
      // Generates WP admin sub menu company page
      add_submenu_page('nicolas_wd_premium', 'Wd META COMPANY', 'Propriété société','manage_options','nicolas_wd_premium_company','wd_premium_create_page_company');
     
+
 }
 
 
@@ -85,7 +88,14 @@ function wd_custom_theme_settings(){
     add_settings_field( 'wd-custom-header', 'Entête personalisé', 'wd_custom_header_activation', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
     add_settings_field( 'wd-custom-css', 'CSS personalisé', 'wd_custom_css_activation', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
     add_settings_field( 'wd-custom-background', 'Fond personalisé', 'wd_custom_background_setting', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
+
+   //Custom Contact form
+   register_setting( 'wd-theme-contact', 'activate_form');
+   add_settings_section( 'wd-contact-section', 'contact-form', 'wd_contact_form_section', 'wd_premium_theme_contact_form' );
+   add_settings_field( 'wd-contact-form', 'Formulaire de contact', 'wd_contact_form_activation', 'wd_premium_theme_contact_form', 'wd-contact-section');
+
 }
+
 
     //Display Company street - Download from wp media + delete
 function wd_meta_profile_picture(){
@@ -186,6 +196,10 @@ function wd_meta_data_company_website(){
 function wd_theme_options(){
     echo 'Activate and deactivate option';
 }
+    //Contact form options call back
+function wd_contact_form_section(){
+    echo 'Activation et désactivation de la page de contact';
+}
     // Post formats callback
 function wd_post_formats(){
     //loop the checkbox status
@@ -197,6 +211,11 @@ function wd_post_formats(){
         $output .= '<label><input type="checkbox" id="'.$format.'" name="post_format['.$format.']" value="1" '.$checked.'> '.$format.'</label><br>';
     }
     echo $output;
+}
+
+function wd_premium_theme_contact_form_create_page(){
+    //generation of our contact form page
+    require_once (get_template_directory() . '/../inc/templates/wd-contact-form.php');
 }
 function wd_premium_create_page(){
     //generation of our admin page
@@ -210,6 +229,14 @@ function wd_premium_create_page_company(){
     // generation of our settings page
 function wd_premium_theme_options_create_page(){
     require_once (get_template_directory(  ) . '/../inc/templates/wd-admin-settings.php');
+}
+
+function wd_contact_form_activation(){
+     //loop the checkbox status
+    $options = get_option('activate_form');
+    $checked = (@$options == 1 ? 'checked' :'' );
+    echo '<label><input type="checkbox" id="activate_form" name="activate_form" value="1" '.$checked.'></label>';
+
 }
 
 function wd_custom_header_activation(){
@@ -228,4 +255,5 @@ function wd_custom_background_setting(){
     $checked = (@$options == 1 ? 'checked' :'' );
     echo '<label><input type="checkbox" id="wd_custom_background" name="wd_custom_background" value="1" '.$checked.'> Activer le fond personalisé</label>';
 }
+
 add_action('admin_menu','wd_premium_admin_page');
