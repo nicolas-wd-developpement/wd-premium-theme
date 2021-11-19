@@ -22,19 +22,20 @@ function wd_premium_admin_page(){
      // Generates WP admin sub menu company page
      add_submenu_page('nicolas_wd_premium', 'Wd META COMPANY', 'Propriété société','manage_options','nicolas_wd_premium_company','wd_premium_create_page_company');
     
+     // Generates WP admin sub menu company page
+    add_submenu_page('nicolas_wd_premium', 'CUSTOM CSS', 'Customiser votre CSS ici','manage_options','nicolas_wd_premium_css','wd_premium_create_page_css');
+    
 
 }
 
-
+     add_action('admin_menu','wd_premium_admin_page');
      // Activate custom settings registers
-     add_action('admin_init','wd_custom_settings_owner');
-     add_action('admin_init','wd_custom_settings_company');
      add_action('admin_init','wd_custom_theme_settings');
 
 
      // Owner meta group
 
-Function wd_custom_settings_owner () {
+Function wd_custom_theme_settings () {
     register_setting('wd-settings-owner','wd_profile_picture');
     register_setting('wd-settings-owner','wd_meta_name');
     register_setting('wd-settings-owner','wd_meta_surname');
@@ -48,10 +49,8 @@ Function wd_custom_settings_owner () {
     add_settings_field( 'wd-meta-job', 'Job', 'wd_meta_job', 'nicolas_wd_premium', 'wd-meta-personal');
     add_settings_field( 'wd-meta-email', 'Email', 'wd_meta_data_email', 'nicolas_wd_premium', 'wd-meta-personal');
     add_settings_field( 'wd-meta-phoneNumber', 'Numéro de téléphone', 'wd_meta_data_phone_number', 'nicolas_wd_premium','wd-meta-personal');
-}
 
-// company meta group registers
-Function wd_custom_settings_company () {
+    // company meta group registers
     register_setting('wd-settings-company','wd_company_logo');
     register_setting('wd-settings-company','wd_company_street');
     register_setting('wd-settings-company','wd_company_city');
@@ -74,28 +73,29 @@ Function wd_custom_settings_company () {
     add_settings_field( 'wd-meta-company-description', 'Description', 'wd_meta_data_company_description', 'nicolas_wd_premium_company', 'wd-meta-company');
     add_settings_field( 'wd-meta-company-region', 'Département', 'wd_meta_company_region', 'nicolas_wd_premium_company', 'wd-meta-company');
     add_settings_field( 'wd-meta-company-website', 'Site Web', 'wd_meta_data_company_website', 'nicolas_wd_premium_company', 'wd-meta-company');    
-}
 
-    //Custom theme settings option
-function wd_custom_theme_settings(){
-    register_setting( 'wd-theme-support', 'post_format');
-    register_setting( 'wd-theme-support', 'wd_custom_header');
-    register_setting( 'wd-theme-support', 'wd_custom_css');
-    register_setting( 'wd-theme-support', 'wd_custom_background');
+        //Custom theme settings option
+        register_setting( 'wd-theme-support', 'post_format');
+        register_setting( 'wd-theme-support', 'wd_custom_header');
+        register_setting( 'wd-theme-support', 'wd_custom_theme');
+        register_setting( 'wd-theme-support', 'wd_custom_background');
     
-    add_settings_section( 'wd-theme-option-settings-field', 'WD Option settings', 'wd_theme_options', 'nicolas_wd_premium_theme_options');
-    add_settings_field( 'wd-post-formats', 'formats', 'wd_post_formats', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
-    add_settings_field( 'wd-custom-header', 'Entête personalisé', 'wd_custom_header_activation', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
-    add_settings_field( 'wd-custom-css', 'CSS personalisé', 'wd_custom_css_activation', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
-    add_settings_field( 'wd-custom-background', 'Fond personalisé', 'wd_custom_background_setting', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
-
-   //Custom Contact form
-   register_setting( 'wd-theme-contact', 'activate_form');
-   add_settings_section( 'wd-contact-section', 'contact-form', 'wd_contact_form_section', 'wd_premium_theme_contact_form' );
-   add_settings_field( 'wd-contact-form', 'Formulaire de contact', 'wd_contact_form_activation', 'wd_premium_theme_contact_form', 'wd-contact-section');
-
+        add_settings_section( 'wd-theme-option-settings-field', 'WD Option settings', 'wd_theme_options', 'nicolas_wd_premium_theme_options');
+        add_settings_field( 'wd-post-formats', 'formats', 'wd_post_formats', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
+        add_settings_field( 'wd-custom-header', 'Entête personalisé', 'wd_custom_header_activation', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
+        add_settings_field( 'wd-custom-theme', 'Personalisé le theme', 'wd_custom_theme_activation', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
+        add_settings_field( 'wd-custom-background', 'Fond personalisé', 'wd_custom_background_setting', 'nicolas_wd_premium_theme_options', 'wd-theme-option-settings-field');
+    
+       //Custom Contact form
+       register_setting( 'wd-theme-contact', 'activate_form');
+       add_settings_section( 'wd-contact-section', 'contact-form', 'wd_contact_form_section', 'wd_premium_theme_contact_form' );
+       add_settings_field( 'wd-contact-form', 'Formulaire de contact', 'wd_contact_form_activation', 'wd_premium_theme_contact_form', 'wd-contact-section');
+    
+        //Custom CSS
+        register_setting( 'wd-theme-css', 'wd_custom_css','wd_sanitize_custom_css');
+        add_settings_section( 'wd-custom-css-section', 'Custom CSS', 'wd_custom_css_section_callBack', 'nicolas_wd_premium_css','' );
+        add_settings_field( 'wd-custom-css', 'Personalisé le CSS', 'wd_custom_css_activation', 'nicolas_wd_premium_css', 'wd-custom-css-section');
 }
-
 
     //Display Company street - Download from wp media + delete
 function wd_meta_profile_picture(){
@@ -177,7 +177,7 @@ function wd_meta_data_siret(){
 
     //Display Owner full name
 function wd_meta_fullName(){
-    $metaName = esc_attr(get_option( "wd_meta_name", 'Enter your name' ));
+   global $metaName = esc_attr(get_option( "wd_meta_name", 'Enter your name' ));
     $metaSurname = esc_attr(get_option( "wd_meta_surname", 'Enter your surname' ));
     echo '<input type="text" name="wd_meta_name" placeholder="enter your Name" value="'.$metaName.'"/> 
           <input type="text" name="wd_meta_surname" placeholder="enter your surname" value="'.$metaSurname.'"/>';
@@ -223,7 +223,7 @@ function wd_premium_create_page(){
 }
     //generation of our admin page
 function wd_premium_create_page_company(){
-    //generation of our admin page
+
     require_once (get_template_directory() . '/../inc/templates/wd-admin-company.php');
 }
     // generation of our settings page
@@ -231,13 +231,31 @@ function wd_premium_theme_options_create_page(){
     require_once (get_template_directory(  ) . '/../inc/templates/wd-admin-settings.php');
 }
 
+//generation of our admin page
+function wd_premium_create_page_css(){
+
+    require_once (get_template_directory() . '/../inc/templates/wd-admin-css.php');
+}
+
 function wd_contact_form_activation(){
-     //loop the checkbox status
+    //loop the checkbox status
     $options = get_option('activate_form');
     $checked = (@$options == 1 ? 'checked' :'' );
     echo '<label><input type="checkbox" id="activate_form" name="activate_form" value="1" '.$checked.'></label>';
 
 }
+
+
+function wd_custom_css_activation(){
+    $css = get_option('wd_custom_css');
+    $css = (empty($css) ? '/* wd Theme Custom CSS */' : $css );
+    echo '<div id="customCss">'.$css.'</div><textarea id="wd_css" name="wd_css" style="display:none;visibility:hidden;">'.$css.'</textarea>';
+}
+
+function wd_custom_css_section_callBack(){
+    echo 'Customisez ici votre thème WD premium avec votre propre code CSS';
+}
+
 
 function wd_custom_header_activation(){
     //loop the checkbox status
@@ -245,10 +263,10 @@ function wd_custom_header_activation(){
     $checked = (@$options == 1 ? 'checked' :'' );
     echo '<label><input type="checkbox" id="wd_custom_header" name="wd_custom_header" value="1" '.$checked.'> Activer l\'entête personalisé</label>';
 }
-function wd_custom_css_activation(){
-    $options = get_option('wd_custom_css');
+function wd_custom_theme_activation(){
+    $options = get_option('wd_custom_theme');
     $checked = (@$options == 1 ? 'checked' :'' );
-    echo '<label><input type="checkbox" id="wd_custom_css" name="wd_custom_css" value="1" '.$checked.'> Activer css personalisé</label>';
+    echo '<label><input type="checkbox" id="wd_custom_theme" name="wd_custom_theme" value="1" '.$checked.'> Activer la personalisalisaton du thème</label>';
 }
 function wd_custom_background_setting(){
     $options = get_option('wd_custom_background');
@@ -256,4 +274,7 @@ function wd_custom_background_setting(){
     echo '<label><input type="checkbox" id="wd_custom_background" name="wd_custom_background" value="1" '.$checked.'> Activer le fond personalisé</label>';
 }
 
-add_action('admin_menu','wd_premium_admin_page');
+function wd_sanitize_custom_css( $input ){
+	$output = esc_textarea( $input );
+	return $output;
+}

@@ -21,11 +21,15 @@ $optionsCustomHeader = get_option('wd_custom_header');
 if($optionsCustomHeader==1){
     add_theme_support( 'custom-header');
 }
-$optionsCustomFooter = get_option('wd_custom_css');
+$optionsCustomFooter = get_option('wd_custom_theme');
 if($optionsCustomFooter==1){
     add_theme_support( 'dark-editor-style');
 }
 $optionsCustomBackground = get_option('wd_custom_background');
 if($optionsCustomBackground==1){
     add_theme_support( 'custom-background');
+}
+$optionsCustomCss = get_option('wd_custom_css');
+if($optionsCustomCss==1){
+    add_theme_support( 'custom-css');
 }
