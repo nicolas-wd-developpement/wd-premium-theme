@@ -1,50 +1,53 @@
+@charset "UTF-8";
 /*!
-    CSS - admin panel
+    CSS - Front End
  */
-#wd-meta-company {
-  display: inline-block;
-  font-family: "Poppins", Helvetica, Arial, Lucida, sans-serif;
-  line-height: 1.7em;
-  font-weight: 500;
-  height: 450px;
-  min-height: 450px;
-  max-height: 450px;
-  padding: 20px;
-  margin: 20px;
-  box-shadow: 6px 6px 18px 0px rgba(0, 0, 0, 0.3);
-  transition: transform 300ms ease 0ms, box-shadow 300ms ease 0ms;
-  background-size: cover;
+
+  /*!
+    Generic
+ */
+
+body{
+    font-family: 'Poppins','Helevita',Verdana,Arial, sans-serif;
 }
 
-#wd-meta-general-form {
-  display: inline-block;
+.background-image{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
+.flex-container > div {
+    width: 600px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 50%;
+     -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+ /*!
+    Header
+ */
+.header-container{
+    position: relative;
+    display: block; 
+    height: 426px;
+ }
 
-.image-container {
-  display: inline-block;
-  width: 100%;
-  overflow: hidden;
-  text-align: center;
+h1{
+    margin-top: 0px;
 }
-
-.profile-picture {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 20px auto;
-}
-
-.profile-picture img {
-  width: 100%;
-  height: auto;
-}
-
-.display-form {
-  float: left;
-  padding: 20px;
-  margin: 20px;
-  box-shadow: 6px 6px 18px 0px rgba(0, 0, 0, 0.3);
-  min-height: 450px;
-}
-
-/*# sourceMappingURL=wd.css.map */
+ .site-title{
+    font-size: 2.5em;
+    font-weight: 900;
+ }
+ .site-description{
+     color: white;
+     font-size: 2em;
+     font-weight: 600;
+ }

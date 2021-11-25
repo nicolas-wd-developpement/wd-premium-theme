@@ -30,34 +30,30 @@
 <body <?php body_class( );?>>
 
 <h1 class="visually-hidden">Headers examples</h1>
-  <div class="container">
+
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12 vertical-align">
 			<div class="header-container background-image text-center flex-container" style="background-image: url(<?php header_image(); ?>);">
 			 <div class="flex-container">
-			 	<h1 class="site-title"><?php bloginfo( 'name' )?></h1>
-				<h2 class="site-description"><?php bloginfo( 'description' )?></h2>
+					<h1 class="site-title"><?php bloginfo( 'name' )?></h1>
+					<h2 class="site-description"><?php bloginfo( 'description' )?></h2>
 			 </div>
 			</div><!--.header-container-->
-
 		</div><!--.col-xs-12-->
 	</div><!--.row-->
-  
-  </div> <!-- .container-fluid -->
-	
-  <div class="container-fluid">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-        <span class="fs-4">Simple header</span>
-      </a>
+</div> <!-- .container-fluid -->
 
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-      </ul>
-    </header>
-  </div>
+<div class="container nav-container">
+	<nav class="navbar navbar-default wd-navbar nav-item">
+		<?php
+			wp_nav_menu( array (
+				'theme_location' => 'header_menu',
+				'container' => false,
+				'menu_class' => 'nav nav-pills',
+				'add_li_class' => 'nav-item',
+			) );
+		?>
+	</nav>
+</div>
+
