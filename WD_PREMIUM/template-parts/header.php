@@ -44,16 +44,29 @@
 	</div><!--.row-->
 </div> <!-- .container-fluid -->
 
-<div class="container nav-container">
-	<nav class="navbar navbar-default wd-navbar nav-item">
-		<?php
-			wp_nav_menu( array (
-				'theme_location' => 'header_menu',
-				'container' => false,
-				'menu_class' => 'nav nav-pills',
-				'add_li_class' => 'nav-item',
-			) );
-		?>
-	</nav>
-</div>
+<nav class="navbar navbar-expand-md navbar-primary bg-light wd-navbar">
+    <div class="container-fluid ">
+        <a class="navbar-brand " href="<?php bloginfo( 'wpurl' ); ?>"><?php bloginfo( 'name' )?></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+			<img src=<?php bloginfo( 'logo' ); ?> alt="" width="30" height="24" class="d-inline-block align-text-top">
+
+			</span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="main-menu">
+            <?php
+            wp_nav_menu(array(
+                'theme_location' => 'header_menu',
+                'container' => false,
+                'menu_class' => 'justify-content-en',
+                'fallback_cb' => '__return_false',
+                'items_wrap' => '<ul id="%1$s" class="active navbar-nav me-auto mb-2 mb-md-0 %2$s">%3$s</ul>',
+                'depth' => 2,
+                'walker' => new bootstrap_5_wp_nav_menu_walker()
+            ));
+            ?>
+        </div>
+    </div>
+</nav>
 
