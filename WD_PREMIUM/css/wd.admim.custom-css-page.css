@@ -1,10 +1,13 @@
 @charset "UTF-8";
 /*!
-    CSS - ACE
+    CSS - Front End
  */
 
- #customCss{
-     position: relative;
-     width: 500px;
-     height: 400px;
+ /*!
+    Header
+ */
+.header-container{
+    position: relative;
+    display: block; 
+    height: 326px;
  }
