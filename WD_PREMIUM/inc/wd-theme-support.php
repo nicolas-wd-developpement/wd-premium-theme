@@ -1,6 +1,6 @@
 <?php
 /*
-
+ @package wd-theme
     =================================
     WD THEME SUPPORT PAGE
     =================================
@@ -48,9 +48,63 @@ function wd_register_nav_menu(){
 
 add_action( 'after_setup_theme', 'wd_register_nav_menu', 10);
 
-<?php
+add_theme_support( 'post-thumbnails');
 
-// bootstrap 5 wp_nav_menu walker
+/*
+
+    =================================
+    Blog Loop custom function
+    =================================
+
+*/
+function wd_posted_meta(){
+  $posted_on = human_time_diff( get_the_time('U') , current_time('timestamp') );
+	
+	$categories = get_the_category();
+	$separator = ', ';
+	$output = '';
+	$i = 1;
+	
+	if( !empty($categories) ):
+		foreach( $categories as $category ):
+			if( $i > 1 ): $output .= $separator; endif;
+			$output .= '<a href="' . esc_url( get_category_link( $category->term_id ) ) . '" alt="' . esc_attr( 'View all posts in%s', $category->name ) .'">' . esc_html( $category->name ) .'</a>';
+			$i++; 
+		endforeach;
+	endif;
+	
+	return '<span class="posted-on">Posted <a href="'. esc_url( get_permalink() ) .'">' . $posted_on . '</a> ago</span> / <span class="posted-in">' . $output . '</span>';
+}
+
+function wd_posted_footer(){
+	
+	$comments_num = get_comments_number();
+	if( comments_open() ){
+		if( $comments_num == 0 ){
+			$comments = __('No Comments');
+		} elseif ( $comments_num > 1 ){
+			$comments= $comments_num . __(' Comments');
+		} else {
+			$comments = __('1 Comment');
+		}
+		$comments = '<a class="comments-link text-right" href="' . get_comments_link() . '"><span class="text-right">'. $comments .'</span></a>';
+	} else {
+		$comments = __('Comments are closed');
+	}
+	
+	return '<div class="post-footer-container"><div class="row"><div class="col-xs-12 col-sm-6">'. get_the_tag_list('<div class="tags-list"><span class="wd-tag">', ' ', '</span></div>') .'</div><div class="col-xs-12 col-sm-6 float-right text-right wd-comment">'. $comments .'</div></div></div>';
+}
+
+
+
+/*
+
+    =================================
+   bootstrap 5 wp_nav_menu walker
+    =================================
+
+*/
+
 class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
 {
   private $current_item;
@@ -126,5 +180,4 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
     $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
   }
 }
-// register a new menu
-register_nav_menu('main-menu', 'Main menu');
+
